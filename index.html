@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <title>Yamato's Future</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body style="background-color: black;">
+    <audio src="audio/song.mp3" controls autoplay loop hidden>
+        <p>Seu navegador não suporta o elemento audio </p>
+    </audio>
+    <div class="container mt-5 show" id="start">
+        <div class="col align-self-center">
+            <div class=" row mt-3 d-flex justify-content-center">
+                <img src="images/banner.gif" class="img-fluid">
+            </div>
+            <div class="row mt-4 d-flex justify-content-center">
+                <p class="mb-3 text-monospace text-danger">Digite 'start' abaixo para jogar.</p>
+            </div>
+            <div class="row mt-4 d-flex justify-content-center">
+                <input type="text" id="startTxt" class="bg-dark text-white w-75 text-monospace" value="[Hacker@Har ~]$ "
+                    onkeyup="showTutorial()">
+            </div>
+        </div>
+    </div>
+    <div class="container mt-5 hide" id="tutorial">
+        <div class="row d-flex justify-content-md-center">
+            <h1 class="text-warning text-center mt-4">Welcome to Yamato's Future</h1>
+        </div>
+        <div class="row mt-3 d-flex justify-content-center">
+            <img src="images/00.png" class="img-fluid">
+        </div>
+        <div class="container mt-5">
+            <div class="row d-flex justify-content-center">
+                <p class="text-white text-justify">
+                    Neste jogo você decide as ações de Yamato, um hacker
+                    iniciante que sonha em ser lembrado como uma lenda.
+                </p>
+                <p class="text-white text-justify">
+                    Antes de cada decisão, você deve responder corretamente a uma pergunta
+                    sobre 'programação' ou 'inglês na informática'.
+                </p>
+            </div>
+            <div class="container">
+                <div class="row d-flex justify-content-center mt-3 mb-5">
+                    <input type="button" value="</Continuar>" class="btn btn-light w-75 btn-continue"
+                        onclick="startGame(), up()">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-5 hide" id="game_question">
+        <div class="container">
+            <div id="resume">
+                <div class="row d-flex justify-content-center mb-5">
+                    <h6 class="text-danger text-center mt-4">RESUMO</h6>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 text-center">
+                        <img class="card-img-top" src="" alt="Card image cap" id="continueImage">
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="container d-flex h-100 bg-text">
+                            <div class="row justify-content-center align-self-center">
+                                <h5 class="card-title text-center" id="continueTitle"></h5>
+                                <p class="card-text text-justify" id="continueText"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4 d-flex justify-content-center space">
+                    <input class="btn btn-outline-info w-50" id="btn-resume" type="button" value="Continuar"
+                        onclick="hideResume(), up()">
+                </div>
+            </div>
+            <div id="question" class="hide">
+                <div class="row d-flex justify-content-center">
+                    <h6 class="text-danger text-center mt-4">PERGUNTA</h6>
+                </div>
+                <div class="row d-flex justify-content-center mt-5">
+                    <h5 class="text-white text-justify" id="questionMessage"></h5>
+                </div>
+                <div class="row mt-3 d-flex justify-content-center">
+                    <figure>
+                        <figcaption class="text-center text-muted">Exemplo</figcaption>
+                        <img src="" class="img-fluid" id="questionImage">
+                    </figure>
+                </div>
+                <div class="row mt-4">
+                    <div class="container">
+                        <div class="col-sm-12 d-flex justify-content-center mt-2">
+                            <input type="text" id="answerTxt" class="bg-dark text-white w-50 text-monospace"
+                                value="[Hack@Har ~]$ ">
+                        </div>
+                        <div class="col-sm-12 d-flex justify-content-center mt-2 mb-5">
+                            <input class="btn btn-outline-info w-50 btn-continue" type="button" id="btnContinue"
+                                value="Continuar" onclick="checkAnswer(), up()">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5 hide mb-4" id="game_choice">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <h6 class="text-danger text-center mt-4">HORA DE ESCOLHER!</h6>
+            </div>
+            <div class="row mt-3">
+                <div class="col-sm-12 col-md-6 text-center">
+                    <img class="card-img-top" src="" alt="Card image cap" id="card-image">
+                </div>
+                <div class="col-sm-12 col-md-6">
+                    <div class="container d-flex h-100 bg-text text-center">
+                        <div class="row justify-content-center align-self-center">
+                            <h5 class="card-title text-center" id="card-title"></h5>
+                            <p class="card-text text-justify" id="card-text"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center mt-5 space">
+                <h5 class="text-white text-justify">Qual sua decisão?</h5>
+            </div>
+            <div class="row">
+                <div class="container">
+                    <div class="col-sm-12 d-flex justify-content-center mt-2 mb-4">
+                        <input class="btn btn-outline-info w-75" type="button" id="btn1"
+                            onclick="chooseOption(this.value), up()">
+                        <input class="btn btn-outline-info w-75" type="button" id="btn2"
+                            onclick="chooseOption(this.value), up()">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="hintModal" tabindex="-1" role="dialog" aria-labelledby="hintModal"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content" style="background-color: #2c2f33;"> 
+                <div class="row d-flex justify-content-center p-2">
+                    <h5 class="modal-title text-white" id="exampleModalLongTitle">
+                        <i class="fa fa-lightbulb-o text-warning" aria-hidden="true"></i> 
+                        HINT 
+                        <i class="fa fa-lightbulb-o text-warning" aria-hidden="true"></i>
+                    </h5>
+                </div>
+                <div class="row text-center text-white p-4">
+                    <div class="col-12">
+                        <p id="hintDescription"></p>
+                    </div>
+                    <div class="col-12">
+                        <p id="hintAnswer"></p>
+                    </div>
+                </div>
+                <div class="row d-flex justify-content-center pb-3">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">UNDERSTOOD</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="javascript/options.js" type="text/javascript"></script>
+    <script src="javascript/index.js" type="text/javascript"></script>
+</body>
+
+</html>
